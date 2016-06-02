@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import test.bluerain.youku.com.downloader.entities.ViewItemInfo;
 import test.bluerain.youku.com.downloader.net.DownloadTask;
+import test.bluerain.youku.com.downloader.utils.CommonUtils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -33,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
     /*视频*/
     //    private static String URL1 = "http://106.38.249.110/youku/67745984B58347900582C41AE/03000207005707C308F78C316C87FE58D3A134-0A81-E768-B473
     // -151C0E335182.flv";
-    private static String URL2 = "http://36.110.176.41/youku/6775131A60D3E81BDAB7C86089/03000207015707C308F78C316C87FE58D3A134-0A81-E768-B473" +
-            "-151C0E335182.flv";
+//    private static String URL2 = "http://36.110.176.41/youku/6775131A60D3E81BDAB7C86089/03000207015707C308F78C316C87FE58D3A134-0A81-E768-B473" +
+//            "-151C0E335182.flv";
 
     /*apk*/
-//    private static String URL = "http://test.gamex.mobile.youku.com/apkdowload/1390298687_youdao_433.apk";
+    private static String URL = "http://test.gamex.mobile.youku.com/apkdowload/1390298687_youdao_433.apk";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +91,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void downloadTest() {
-        DownloadInfo info = new DownloadInfo(URL2, 2, Environment.getExternalStorageDirectory() + "/download_test/aaa.flv");
+        DownloadInfo info = new DownloadInfo(URL, getThreadNum(), Environment.getExternalStorageDirectory() + "/download_test/aaa.flv");
         DownloadTask task = new DownloadTask(info);
         task.start();
+    }
+
+    public int getThreadNum() {
+        String text = mEditTextThread.getText().toString();
+        if (TextUtils.isEmpty(text))
+            return 1;
+        return CommonUtils.getInt(text);
+
     }
 
 

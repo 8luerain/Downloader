@@ -18,7 +18,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="缓存区大小"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/editText_conunt"
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="次数"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/editText_thread"
@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="线程数"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
     </LinearLayout>
 
     <View
