@@ -104,12 +104,11 @@ public class DownloadEngine implements Runnable {
                     /*下载速度*/
                     int downloadSpeed = getDownloadSpeed(duration, peerReadLength);
                     mThreadInfo.setMSpeed(downloadSpeed);
-
-                    sendMessage(DOWNLOAD_UPDATE);
-
-//                    if (now - sendMessageTimeInterval > 1000) {
-//                        sendMessageTimeInterval = now; //间隔1s发送一次
-//                    }
+                    /*发送消息*/
+                    if (now - sendMessageTimeInterval > 1000) {
+                        sendMessage(DOWNLOAD_UPDATE);
+                        sendMessageTimeInterval = now; //间隔1s发送一次
+                    }
                     if (isPause) {
                         sendMessage(DOWNLOAD_PAUSE);
                         mThreadDAO.insert(mThreadInfo);
