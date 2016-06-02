@@ -10,13 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import test.bluerain.youku.com.downloader.entities.ViewItemInfo;
 import test.bluerain.youku.com.downloader.net.DownloadTask;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private EditText mEditTextCache;
+    private EditText mEditTextConunt;
+    private EditText mEditTextThread;
+    private Button mIdBtnStart;
+    private Button mIdBtnRestart;
+    private ListView mIdListViewMain;
+    private List<ViewItemInfo> mViewItemInfos;
 
-    private Button mIdBtnMainInsertDb;
+
     /*视频*/
     //    private static String URL1 = "http://106.38.249.110/youku/67745984B58347900582C41AE/03000207005707C308F78C316C87FE58D3A134-0A81-E768-B473
     // -151C0E335182.flv";
@@ -31,13 +44,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerReceiver(new DownloadStateBroadcastReceiver(), getMainInentFilter());
-        mIdBtnMainInsertDb = (Button) findViewById(R.id.id_btn_main_insert_db);
-        mIdBtnMainInsertDb.setOnClickListener(new View.OnClickListener() {
+        initData();
+        initView();
+        initEvent();
+    }
+
+
+    private void initData() {
+        mViewItemInfos = new ArrayList<>();
+    }
+
+    private void initView() {
+        mEditTextCache = (EditText) findViewById(R.id.editText_cache);
+        mEditTextConunt = (EditText) findViewById(R.id.editText_conunt);
+        mEditTextThread = (EditText) findViewById(R.id.editText_thread);
+        mIdBtnStart = (Button) findViewById(R.id.id_btn_start);
+        mIdBtnRestart = (Button) findViewById(R.id.id_btn_restart);
+        mIdListViewMain = (ListView) findViewById(R.id.id_list_view_main);
+
+    }
+
+    private void initEvent() {
+        mIdBtnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 downloadTest();
             }
         });
+
     }
 
     private IntentFilter getMainInentFilter() {
